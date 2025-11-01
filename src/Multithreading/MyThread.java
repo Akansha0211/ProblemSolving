@@ -1,37 +1,54 @@
 package Multithreading;
 
+import javax.sound.midi.SysexMessage;
+
 public class MyThread extends Thread{
     @Override
     public void run() {
-
-        System.out.println("print: RUNNING STATE");
+//        for (int i = 1; i<=5; i++){
+//            try {
+//                Thread.sleep(1000);// current thread execution suspended for specified period of time
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//            System.out.println(i);
+//        }
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);// current thread execution suspended for specified period of time
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
-        MyThread t1 = new MyThread();
-        System.out.println(t1.getState()); // NEW STATE
-        t1.start();
-        System.out.println(t1.getState()); // RUNNABLE STATE
-
-        System.out.println(Thread.currentThread().getState()); // main thread's state
-        Thread.sleep(100);
-        System.out.println("main thread " + Thread.currentThread().getState());
-        System.out.println(t1.getState());
-        t1.join(); // main method waits t1 to get completed
-        System.out.println(t1.getState());
-
-//        NEW
+//        MyThread t1 = new MyThread();
+//        t1.start();
+//        System.out.println(t1.getState());
+//        System.out.println("hello");
+//        System.out.println(Thread.currentThread().getState());
+//        System.out.println(t1.getState()); // TIMED_WAITING or RUNNABLE
 //        RUNNABLE
-//        RUNNABLE  / RUNNING ( main thread)
-//        print: RUNNING STATE
+//        hello
+//        RUNNABLE
 //        TIMED_WAITING
 
-        // if we don't use t1.join() --> main method won't wait fro thread t1 for its completion
+//        RUNNABLE
+//        hello
+//        RUNNABLE
+//        RUNNABLE
+
+        MyThread t1 = new MyThread();
+        t1.start();
+        System.out.println(t1.getState());
+        System.out.println("hello");
+        t1.join();
+        System.out.println(Thread.currentThread().getState());
+        System.out.println(t1.getState());
+
+//        RUNNABLE
+//        hello
+//        RUNNABLE
+//        TERMINATED
 
     }
 }
