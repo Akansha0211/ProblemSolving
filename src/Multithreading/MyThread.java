@@ -9,25 +9,16 @@ public class MyThread extends Thread{
     }
     @Override
     public void run() {
-        for(int i =0; i<5; i++){
-            System.out.println(Thread.currentThread().getName() +
-                    " - Priority : " + Thread.currentThread().getPriority() + " - count " + i);
-            try{
-                Thread.sleep(100);
-            }catch (Exception e){
-
-            }
+        try{
+            Thread.sleep(10000);
+            System.out.println("Thread is running");
+        }catch (InterruptedException e){
+            System.out.println("Thread interuppted");
         }
     }
     public static void main(String[] args) throws InterruptedException {
         MyThread t1 = new MyThread("thread akansha");
-        MyThread t2 = new MyThread("thread ayush");
-        MyThread t3 = new MyThread("thread honey");
-        t1.setPriority(Thread.MIN_PRIORITY);
-        t2.setPriority(Thread.NORM_PRIORITY);
-        t3.setPriority(Thread.MAX_PRIORITY);
         t1.start();
-        t2.start();
-        t3.start();
+        t1.interrupt(); // whatever t1 thread is doing get interuppted
     }
 }
