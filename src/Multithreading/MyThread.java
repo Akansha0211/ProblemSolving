@@ -9,16 +9,39 @@ public class MyThread extends Thread{
     }
     @Override
     public void run() {
-        try{
-            Thread.sleep(10000);
-            System.out.println("Thread is running");
-        }catch (InterruptedException e){
-            System.out.println("Thread interuppted");
+        for (int  i =0; i<5; i++){
+            System.out.println(Thread.currentThread().getName() + " is running ");
+            //Thread.yield();
         }
     }
     public static void main(String[] args) throws InterruptedException {
         MyThread t1 = new MyThread("thread akansha");
+        MyThread t2 = new MyThread("thread ayush");
         t1.start();
-        t1.interrupt(); // whatever t1 thread is doing get interuppted
+        t2.start();
     }
+
+    // without yield : random result
+//    thread ayush is running
+//    thread ayush is running
+//    thread ayush is running
+//    thread akansha is running
+//    thread ayush is running
+//    thread akansha is running
+//    thread ayush is running
+//    thread akansha is running
+//    thread akansha is running
+//    thread akansha is running
+
+    // with yield() method
+//    thread akansha is running
+//    thread ayush is running
+//    thread akansha is running
+//    thread ayush is running
+//    thread akansha is running
+//    thread ayush is running
+//    thread akansha is running
+//    thread ayush is running
+//    thread akansha is running
+//    thread ayush is running
 }
