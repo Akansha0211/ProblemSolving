@@ -4,7 +4,10 @@ public class Test {
     public static void main(String[] args) {
         // create a object , and use start() method
         Worlds world = new Worlds();
-        world.start();
+//        world.start(); available in thread class
+        Thread t1 = new Thread(world);
+        t1.start();
+
         for(; ;){
             System.out.println(Thread.currentThread().getName());
         }
