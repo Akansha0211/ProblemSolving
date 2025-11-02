@@ -2,21 +2,20 @@ package Multithreading;
 
 public class Test {
     public static void main(String[] args) {
-        // create a object , and use start() method
-        Worlds world = new Worlds(); // NEW STATE
-//        world.start(); available in thread class
-        Thread t1 = new Thread(world);
-        t1.start(); // RUNNABLE STATE
 
-        for(; ;){
-            System.out.println(Thread.currentThread().getName());
+        Counter counter = new Counter();
+        MyThread t1 = new MyThread(counter);
+        MyThread t2 = new MyThread(counter);
+        t1.start();
+        t2.start(); // 2 threads  , sharing one object(resource)
+        try{
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-
-        // main
-        // Thread-0
-        // ... infinite times
-        // no order folowed ( execution in random order)
-        // 2 independenct task
+        System.out.println(counter.getCount());
+        // variable output : like 1922  : WITHOUT SYNCHRONIZED on increment() method
 
 
     }
